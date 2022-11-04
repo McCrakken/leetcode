@@ -59,22 +59,22 @@ const test3 = { l1: [0], l2: [5,6] };
 
 const addTwoNumbers = (l1, l2) => {
   const addValues = (list1, list2, carry) => {
-    const val1 = (list1 && list1.val) || 0;
+    const val1 = (list1 && list1.val) || 0;         // Returns zero as the value if we are out of values
     const val2 = (list2 && list2.val) || 0;
     const sum = val1 + val2 + carry;
     const nextCarry = sum >= 10 ? 1 : 0;
     const nextVal = sum >= 10 ? (sum - 10) : sum;
 
+    // Recursively build our listNodes. If values are left in any of the elements, add another node
     return (list1 || list2 || carry)
       ? { val: nextVal, next: addValues(list1 && list1.next, list2 && list2.next, nextCarry) }
       : null;
   }
 
   return addValues(l1, l2, 0);
-
 }
 
-console.log(`Test 1 [${test1.l1}] + [${test1.l2}]: ${addTwoNumbers(test1.l1, test1.l2)}`);
-console.log(`Test 2 [${test2.l1}] + [${test2.l2}]: ${addTwoNumbers(test2.l1, test2.l2)}`);
-console.log(`Test 3 [${test3.l1}] + [${test3.l2}]: ${addTwoNumbers(test3.l1, test3.l2)}`);
+// console.log(`Test 1 [${test1.l1}] + [${test1.l2}]: ${addTwoNumbers(test1.l1, test1.l2)}`);
+// console.log(`Test 2 [${test2.l1}] + [${test2.l2}]: ${addTwoNumbers(test2.l1, test2.l2)}`);
+// console.log(`Test 3 [${test3.l1}] + [${test3.l2}]: ${addTwoNumbers(test3.l1, test3.l2)}`);
 
